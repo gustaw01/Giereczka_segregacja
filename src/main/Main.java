@@ -11,10 +11,14 @@ public class Main {
         window.setTitle("Giereczka");
 
         GamePanel gamePanel = new GamePanel();
+        CountdownTimer countdownTimer = new CountdownTimer();
+        gamePanel.add(countdownTimer);
         window.add(gamePanel);
+
         window.pack();
         window.setLocationRelativeTo(null);
         window.setVisible(true);
+
         gamePanel.startGameThread();
     }
 }
