@@ -1,9 +1,14 @@
 package main;
 
+import Entity.Objects;
 import Entity.Player;
+import Entity.Pointer;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class GamePanel extends JPanel implements Runnable{
 
@@ -20,7 +25,10 @@ public class GamePanel extends JPanel implements Runnable{
     MouseHandler mouseH = new MouseHandler();
     Thread gameThread;
     Player player = new Player(this, mouseH);
+    List<Objects> objects = new ArrayList<>();
     CountdownTimer countdownTimer =  new CountdownTimer();
+
+    Pointer pointer = new Pointer(this, mouseH);
 
     public GamePanel() {
 
@@ -28,6 +36,7 @@ public class GamePanel extends JPanel implements Runnable{
         this.setBackground(Color.white);
         this.setDoubleBuffered(true);
         this.addMouseListener(mouseH);
+        this.addMouseMotionListener(mouseH);
         this.setFocusable(true);
         this.setLayout(null);
         this.add(countdownTimer);
@@ -82,11 +91,24 @@ public class GamePanel extends JPanel implements Runnable{
     }
     public void update() {
         player.update();
+        pointer.update();
+        objects.forEach(Objects::update);
+        objects.removeAll(objects.stream().filter(Objects::isDestroyed).collect(Collectors.toList())); //usuwanie elementów które dotarł do celu
+        System.out.println(pointer.x + " : " + pointer.y);
+        if (mouseH.isClicked() && pointer.x > 0) {
+            objects.add(new Objects(this, mouseH, pointer.x, pointer.y));
+
+        }
+
     }
     public void paintComponent(Graphics g) {
 
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
+        g2.clearRect(0,0,1000, 1000);
         player.draw(g2);
+        objects.forEach(o -> o.draw(g2));
+        pointer.draw(g2);
+
     }
 }
