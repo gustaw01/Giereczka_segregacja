@@ -23,11 +23,19 @@ public class GamePanel extends JPanel implements Runnable{
 
     public GamePanel() {
 
+//        this.setLayout(new FlowLayout()); // NIE WIEM CZY POTRZEBNE
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-        this.setBackground(Color.black);
+        this.setBackground(Color.white);
         this.setDoubleBuffered(true);
         this.addMouseListener(mouseH);
         this.setFocusable(true);
+
+        JLabel label = new JLabel("Timer");
+        label.setBounds(250, 250, 100, 100);
+        label.setHorizontalAlignment(JLabel.CENTER);
+        this.setLayout(null);
+        this.add(label);
+        label.repaint();
     }
 
     public void startGameThread() {
@@ -85,6 +93,5 @@ public class GamePanel extends JPanel implements Runnable{
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
         player.draw(g2);
-        g2.dispose();
     }
 }
