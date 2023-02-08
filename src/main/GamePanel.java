@@ -20,14 +20,17 @@ public class GamePanel extends JPanel implements Runnable{
     MouseHandler mouseH = new MouseHandler();
     Thread gameThread;
     Player player = new Player(this, mouseH);
+    CountdownTimer countdownTimer =  new CountdownTimer();
 
     public GamePanel() {
 
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-        this.setBackground(Color.black);
+        this.setBackground(Color.white);
         this.setDoubleBuffered(true);
         this.addMouseListener(mouseH);
         this.setFocusable(true);
+        this.setLayout(null);
+        this.add(countdownTimer);
     }
 
     public void startGameThread() {
@@ -85,6 +88,5 @@ public class GamePanel extends JPanel implements Runnable{
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
         player.draw(g2);
-        g2.dispose();
     }
 }
