@@ -52,5 +52,8 @@ public class Player extends Entity {
         g2.drawImage(paperBin, x, y, gp.tileSize*5, gp.tileSize*5, null);
         g2.drawImage(plasticBin, x + 332, y, gp.tileSize*5, gp.tileSize*5, null);
         g2.drawImage(glassBin, x + 664, y, gp.tileSize*5, gp.tileSize*5, null);
+//        if(mouseH.lmbPressed) {
+//            g2.drawImage();
+//        }
     }
 }

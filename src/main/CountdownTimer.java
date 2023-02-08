@@ -10,7 +10,7 @@ public class CountdownTimer extends JLabel {
 
     Font font = new Font("Arial", Font.PLAIN, 30);
     Timer timer;
-    int second = 2;
+    int second = 60;
     String ddSecond;
     DecimalFormat dFormat = new DecimalFormat("00");
 
@@ -20,9 +20,10 @@ public class CountdownTimer extends JLabel {
         this.setVisible(true);
         this.setBounds(800, 30, 200, 30);
         this.setHorizontalAlignment(JLabel.CENTER);
+        //        this.setForeground(Color.);
         this.setVerticalAlignment(JLabel.CENTER);
         this.repaint();
-        this.setText("Czas: 60");
+        this.setText("Time: 60");
 
         countdownTimer();
         timer.start();
