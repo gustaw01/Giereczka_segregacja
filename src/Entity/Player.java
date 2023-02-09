@@ -5,7 +5,6 @@ import main.MouseHandler;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class Player extends Entity {
@@ -32,10 +31,10 @@ public class Player extends Entity {
 
     public void getPlayerImage() {
         try {
-            papier = ImageIO.read(getClass().getResourceAsStream("/player/papier-160x160.png"));
-            plastik = ImageIO.read(getClass().getResourceAsStream("/player/plastik-160x160.png"));
-            szklo = ImageIO.read(getClass().getResourceAsStream("/player/szklo-160x160.png"));
-            gracz = ImageIO.read(getClass().getResourceAsStream("/player/player-160x160.png"));
+            paperBin = ImageIO.read(getClass().getResourceAsStream("/assets/paperBin-160x160.png"));
+            plasticBin = ImageIO.read(getClass().getResourceAsStream("/assets/plasticBin-160x160.png"));
+            glassBin = ImageIO.read(getClass().getResourceAsStream("/assets/glassBin-160x160.png"));
+            player = ImageIO.read(getClass().getResourceAsStream("/assets/player_sprite-256x256.png"));
         }
         catch(IOException e) {
             e.printStackTrace();
@@ -45,14 +44,10 @@ public class Player extends Entity {
     public void update() {}
 
     public void draw(Graphics2D g2) {
-        BufferedImage paperBin = papier, plasticBin = plastik, glassBin = szklo, player = gracz;
 
         g2.drawImage(paperBin, x, y, gp.tileSize*5, gp.tileSize*5, null);
         g2.drawImage(plasticBin, x + 332, y, gp.tileSize*5, gp.tileSize*5, null);
         g2.drawImage(glassBin, x + 664, y, gp.tileSize*5, gp.tileSize*5, null);
         g2.drawImage(player, playerX, playerY, gp.tileSize*8, gp.tileSize*8, null);
-//        if(mouseH.lmbPressed) {
-//            g2.drawImage();
-//        }
     }
 }

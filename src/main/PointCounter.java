@@ -15,6 +15,5 @@ public class PointCounter extends JLabel {
         this.setVerticalAlignment(JLabel.CENTER);
         this.repaint();
         this.setText("Points: ");
-//        this.setForeground(Color.);
     }
 }

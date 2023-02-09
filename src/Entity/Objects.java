@@ -5,7 +5,6 @@ import main.MouseHandler;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class Objects extends Entity {
@@ -40,7 +39,9 @@ public class Objects extends Entity {
 
     public void getObjectImage() {
         try {
-            odpad = ImageIO.read(getClass().getResourceAsStream("/assets/odpad-32x32.png"));
+            glass = ImageIO.read(getClass().getResourceAsStream("/assets/glass-256x256.png"));
+            plastic = ImageIO.read(getClass().getResourceAsStream("/assets/plastic-256x256.png"));
+            paper = ImageIO.read(getClass().getResourceAsStream("/assets/paper-256x256.png"));
         }
         catch(IOException e) {
             e.printStackTrace();
@@ -76,9 +77,8 @@ public class Objects extends Entity {
 
     public void draw(Graphics2D g2) {
 
-        BufferedImage trash = odpad;
-
-        g2.drawImage(trash, this.x, this.y, gp.tileSize*2, gp.tileSize*2, null);
+        g2.drawImage(glass, this.x, this.y, gp.tileSize*3, gp.tileSize*3, null);
+        g2.drawImage(paper, this.x, this.y, gp.tileSize*3, gp.tileSize*3, null);
+        g2.drawImage(plastic, this.x, this.y, gp.tileSize*3, gp.tileSize*3, null);
     }
 }
-

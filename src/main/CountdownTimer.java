@@ -20,7 +20,6 @@ public class CountdownTimer extends JLabel {
         this.setVisible(true);
         this.setBounds(800, 30, 200, 30);
         this.setHorizontalAlignment(JLabel.CENTER);
-        //        this.setForeground(Color.);
         this.setVerticalAlignment(JLabel.CENTER);
         this.repaint();
         this.setText("Time: 60");
