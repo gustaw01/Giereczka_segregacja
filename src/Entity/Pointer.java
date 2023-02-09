@@ -7,29 +7,27 @@ import java.awt.*;
 
 public class Pointer {
 
-    public final int y = 50;
-
-    public int x = 0;
-
-    GamePanel gamePanel;
-
     MouseHandler mouseHandler;
+    int startX, startY, endX, endY;
 
-    public Pointer(GamePanel gamePanel, MouseHandler mouseH) {
-        this.gamePanel = gamePanel;
+    public Pointer(MouseHandler mouseH, int startX, int startY, int endX, int endY) {
         this.mouseHandler = mouseH;
+        this.startX = startX;
+        this.startY = startY;
+        this.endX = endX;
+        this.endY = endY;
     }
 
     public void draw(Graphics2D g2) {
 
         g2.setColor(Color.RED);
-        g2.fillRect(x, y, 5, 5);
+        g2.fillRect(endX - 2, endY - 2, 5, 5);
 
         g2.setColor(Color.BLACK);
-        g2.drawLine(x,y ,gamePanel.getWidth() /2, gamePanel.getHeight() - 100);
+        g2.drawLine(startX,startY ,endX, endY);
     }
 
     public void update() {
-        this.x = mouseHandler.getCurrentX();
+        this.endX = mouseHandler.getCurrentX();
     }
 }

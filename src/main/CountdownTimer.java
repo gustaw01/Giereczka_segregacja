@@ -33,14 +33,17 @@ public class CountdownTimer extends JLabel {
         timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                second--;
-                ddSecond = dFormat.format(second);
-                CountdownTimer.this.setText("Czas: " + ddSecond);
-                if(second==0) {
-                    timer.stop();
-                }
+                showText();
             }
         });
+    }
+
+    public void showText() {
+        second--;
+        ddSecond = dFormat.format(second);
+        CountdownTimer.this.setText("Czas: " + ddSecond);
+        if(second==0) {
+            timer.stop();
+        }
     }
 }
