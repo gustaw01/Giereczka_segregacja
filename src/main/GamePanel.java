@@ -17,8 +17,8 @@ public class GamePanel extends JPanel implements Runnable{
 
     // screen settings
 
-    public final int tileSize = TRASH_SIZE;
-    final int maxScreenCol = TRASH_SIZE;
+    public final int tileSize = 32;
+    final int maxScreenCol = 32;
     final int maxScreenRow  = 24;
     final int screenWidth = tileSize * maxScreenCol; // 1024px
     final int screenHeight = tileSize * maxScreenRow; // 768px
@@ -33,11 +33,12 @@ public class GamePanel extends JPanel implements Runnable{
     List<Trash> trashes = Collections.synchronizedList(new ArrayList<>()); // lista bezpiecznia dla wielu wątków
     List<Container> containers = new ArrayList<>();
     CountdownTimer countdownTimer =  new CountdownTimer();
+    Font font = new Font("Arial", Font.PLAIN, 30);
 
     Pointer pointer;
 
     private final static int END_Y = 25; //pozycja y celownika
-    private final static int TRASH_SIZE = 32; // rozmiar odpadu
+    private final static int TRASH_SIZE = 96; // rozmiar odpadu
 
     public GamePanel() {
 
@@ -94,7 +95,7 @@ public class GamePanel extends JPanel implements Runnable{
             drawCount++;
 
             if(timer >= 1000000000) {
-                System.out.println("FPS: " +  drawCount);
+//                System.out.println("FPS: " +  drawCount);
                 drawCount = 0;
                 timer = 0;
             }
@@ -154,8 +155,6 @@ public class GamePanel extends JPanel implements Runnable{
                     countdownTimer.second += 10;
                 }
                 score++;
-                countdownTimer.showText();
-                countdownTimer.repaint();
             }
         }
     }
@@ -185,12 +184,12 @@ public class GamePanel extends JPanel implements Runnable{
         trashes.forEach(o -> o.draw(g2));
         containers.forEach(c -> c.draw(g2));
         pointer.draw(g2);
-        countdownTimer.repaint();
         drawPoints(g2);
     }
 
     private void drawPoints(Graphics2D g2) {
         g2.setColor(Color.BLACK);
-        g2.drawString(score + "", 10, 10);
+        g2.setFont(font);
+        g2.drawString(score + "", 750, 55);
     }
 }

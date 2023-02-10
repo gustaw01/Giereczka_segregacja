@@ -58,7 +58,7 @@ public class Container implements Drawable{
             default:
                 throw new RuntimeException("wrong name");
         }
-        g2.fillRect(x, y, width, height);
+//        g2.fillRect(x, y, width, height);
         g2.drawImage(img, x, y, width, height, null);
     }
 

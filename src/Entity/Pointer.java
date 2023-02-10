@@ -1,6 +1,5 @@
 package Entity;
 
-import main.GamePanel;
 import main.MouseHandler;
 
 import java.awt.*;
@@ -15,13 +14,13 @@ public class Pointer {
         this.startX = startX;
         this.startY = startY;
         this.endX = endX;
-        this.endY = endY;
+        this.endY = endY + 50;
     }
 
     public void draw(Graphics2D g2) {
 
         g2.setColor(Color.RED);
-        g2.fillRect(endX - 2, endY - 2, 5, 5);
+        g2.fillRect(endX - 5, endY - 5, 10, 10);
 
         g2.setColor(Color.BLACK);
         g2.drawLine(startX,startY ,endX, endY);

@@ -10,7 +10,7 @@ public class PointCounter extends JLabel {
 
         this.setFont(font);
         this.setVisible(true);
-        this.setBounds(650, 30, 200, 30);
+        this.setBounds(600, 30, 200, 30);
         this.setHorizontalAlignment(JLabel.CENTER);
         this.setVerticalAlignment(JLabel.CENTER);
         this.repaint();

@@ -11,10 +11,8 @@ public class Main {
         window.setTitle("Giereczka");
 
         GamePanel gamePanel = new GamePanel();
-        CountdownTimer countdownTimer = new CountdownTimer();
         PointCounter pointCounter = new PointCounter();
         gamePanel.add(pointCounter);
-        gamePanel.add(countdownTimer);
         window.add(gamePanel);
 
         window.pack();

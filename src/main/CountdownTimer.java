@@ -4,15 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DecimalFormat;
 
 public class CountdownTimer extends JLabel {
 
     Font font = new Font("Arial", Font.PLAIN, 30);
     Timer timer;
     int second = 60;
-    String ddSecond;
-    DecimalFormat dFormat = new DecimalFormat("00");
 
     public CountdownTimer() {
 
@@ -33,17 +30,15 @@ public class CountdownTimer extends JLabel {
         timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                showText();
+                second--;
+                CountdownTimer.this.setText("Time: " + second);
+                System.out.println("Seconds: " + second);
+                if(second==0) {
+                    timer.stop();
+                }
             }
         });
     }
-
-    public void showText() {
-        second--;
-        ddSecond = dFormat.format(second);
-        CountdownTimer.this.setText("Czas: " + ddSecond);
-        if(second==0) {
-            timer.stop();
-        }
-    }
 }
+
+
