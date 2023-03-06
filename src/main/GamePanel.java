@@ -157,19 +157,26 @@ public class GamePanel extends JPanel implements Runnable{
 
     boolean missedContainer = true;
     private void ifScoredAddPoints(Trash trash) {
+        boolean isShot = false;
         for (Container container : containers) {
             if (isRightContainer(trash, container) && isAtRightPlace(container, trash)) {
-                score += 3;
-                System.out.println(score);
-                if (score > 5 && score % 10 == 2) {
-                    containers.forEach(Container::incrementSpeed);
-                    countdownTimer.second += 10;
-                }
+                isShot = true;
+                break;
             }
-            else if (!isRightContainer(trash, container) && !isAtRightPlace(container, trash)){
-                score--;
-                System.out.println(score);
+        }
+
+        if (isShot) {
+            score += 3;
+            missedContainer = false;
+            System.out.println(score);
+            if (score > 5 && score % 10 == 2) {
+                containers.forEach(Container::incrementSpeed);
+                countdownTimer.second += 10;
             }
+        } else {
+            score--;
+            System.out.println(score);
+            missedContainer = true;
         }
     }
 
@@ -209,7 +216,7 @@ public class GamePanel extends JPanel implements Runnable{
         else {
             g2.setColor(Color.WHITE);
             g2.setFont(font);
-            g2.drawString("You missed the container! -2 points", 30, 700);
+            g2.drawString("good shot, +1 point", 30, 700);
         }
     }
 }
