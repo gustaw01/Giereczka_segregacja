@@ -120,8 +120,6 @@ public class Trash implements Drawable {
     public void draw(Graphics2D g2) {
 
         g2.drawImage(img, (int) this.x - 20, (int) this.y - 20, width, height, null);
-//        g2.drawImage(paper, this.x, this.y, gp.tileSize*3, gp.tileSize*3, null);
-//        g2.drawImage(plastic, this.x, this.y, gp.tileSize*3, gp.tileSize*3, null);
     }
 
     public boolean haveDes() {

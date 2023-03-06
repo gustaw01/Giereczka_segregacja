@@ -21,6 +21,7 @@ public class CountdownTimer extends JLabel {
         this.repaint();
         this.setText("Time: 60");
 
+
         countdownTimer();
         timer.start();
     }
@@ -32,7 +33,6 @@ public class CountdownTimer extends JLabel {
             public void actionPerformed(ActionEvent e) {
                 second--;
                 CountdownTimer.this.setText("Time: " + second);
-                System.out.println("Seconds: " + second);
                 if(second==0) {
                     timer.stop();
                 }

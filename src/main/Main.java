@@ -8,7 +8,7 @@ public class Main {
 
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
-        window.setTitle("Giereczka");
+        window.setTitle("Recycling game");
 
         GamePanel gamePanel = new GamePanel();
         PointCounter pointCounter = new PointCounter();

@@ -27,6 +27,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     int FPS = 60;
 
+
     MouseHandler mouseH = new MouseHandler();
     Thread gameThread;
     Player player = new Player(mouseH, screenWidth / 2, screenHeight - 160, 160, 160);
@@ -40,7 +41,7 @@ public class GamePanel extends JPanel implements Runnable{
     private final static int END_Y = 25; //pozycja y celownika
     private final static int TRASH_SIZE = 96; // rozmiar odpadu
 
-    public GamePanel() {
+    public GamePanel(){
 
         initPanel();
         initGameVariables();
@@ -95,7 +96,6 @@ public class GamePanel extends JPanel implements Runnable{
             drawCount++;
 
             if(timer >= 1000000000) {
-//                System.out.println("FPS: " +  drawCount);
                 drawCount = 0;
                 timer = 0;
             }
@@ -147,24 +147,30 @@ public class GamePanel extends JPanel implements Runnable{
         trashes.removeAll(toDelete); //usuwanie wszystkie które były w liście
     }
 
-    private void ifScoredAddPoints(Trash trash) {
-        for (Container container : containers) {
-            if (isRightContainer(trash, container) && isAtRightPlace(container, trash)) {
-                if (score > 0 && score % 10 == 0) {
-                    containers.forEach(Container::incrementSpeed);
-                    countdownTimer.second += 10;
-                }
-                score++;
-            }
-        }
-    }
-
-    private static boolean isRightContainer(Trash trash, Container container) {
+    private boolean isRightContainer(Trash trash, Container container) {
         return container.getName().equals(trash.getName());
     }
 
     private boolean isAtRightPlace(Container c, Trash t) {
         return c.getX() < t.getX() + t.getWidth() && c.getX() + c.getWidth() > t.getX();
+    }
+
+    boolean missedContainer = true;
+    private void ifScoredAddPoints(Trash trash) {
+        for (Container container : containers) {
+            if (isRightContainer(trash, container) && isAtRightPlace(container, trash)) {
+                score += 3;
+                System.out.println(score);
+                if (score > 5 && score % 10 == 2) {
+                    containers.forEach(Container::incrementSpeed);
+                    countdownTimer.second += 10;
+                }
+            }
+            else if (!isRightContainer(trash, container) && !isAtRightPlace(container, trash)){
+                score--;
+                System.out.println(score);
+            }
+        }
     }
 
     private void throwTrash() {
@@ -185,11 +191,25 @@ public class GamePanel extends JPanel implements Runnable{
         containers.forEach(c -> c.draw(g2));
         pointer.draw(g2);
         drawPoints(g2);
+        drawError(g2);
     }
 
-    private void drawPoints(Graphics2D g2) {
+    public void drawPoints(Graphics2D g2) {
         g2.setColor(Color.BLACK);
         g2.setFont(font);
         g2.drawString(score + "", 750, 55);
+    }
+
+    public void drawError(Graphics2D g2) {
+        if(missedContainer) {
+            g2.setColor(Color.BLACK);
+            g2.setFont(font);
+            g2.drawString("You missed the container! -2 points", 30, 700);
+        }
+        else {
+            g2.setColor(Color.WHITE);
+            g2.setFont(font);
+            g2.drawString("You missed the container! -2 points", 30, 700);
+        }
     }
 }
