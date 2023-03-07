@@ -169,7 +169,7 @@ public class GamePanel extends CustomPanel implements Runnable{
         return c.getX() < t.getX() + t.getWidth() && c.getX() + c.getWidth() > t.getX();
     }
 
-    boolean missedContainer = true;
+    boolean missedContainer = false;
     private void ifScoredAddPoints(Trash trash) {
         boolean isShot = false;
         for (Container container : containers) {
@@ -180,7 +180,7 @@ public class GamePanel extends CustomPanel implements Runnable{
         }
 
         if (isShot) {
-            score += 3;
+            score ++;
             missedContainer = false;
             System.out.println(score);
             if (score > 5 && score % 10 == 2) {
@@ -225,12 +225,12 @@ public class GamePanel extends CustomPanel implements Runnable{
         if(missedContainer) {
             g2.setColor(Color.BLACK);
             g2.setFont(font);
-            g2.drawString("You missed the container! -2 points", 30, 700);
+            g2.drawString("You missed the container! -1 point", 30, 700);
         }
         else {
             g2.setColor(Color.WHITE);
             g2.setFont(font);
-            g2.drawString("good shot, +1 point", 30, 700);
+            g2.drawString("You missed the container! -1 point", 30, 700);
         }
     }
 }

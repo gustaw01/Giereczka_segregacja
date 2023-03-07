@@ -14,7 +14,7 @@ public class MainMenuPanel extends CustomPanel {
             this.currentState = GoToEvent.GAME_PANEL;
         });
         add(goToGameButton);
-        goToGameButton.setText("Rozpocznij Rozgrywkę");
+        goToGameButton.setText("Start game");
     }
 
 }
