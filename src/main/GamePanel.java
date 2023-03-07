@@ -5,15 +5,15 @@ import Entity.Trash;
 import Entity.Player;
 import Entity.Pointer;
 
-import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class GamePanel extends JPanel implements Runnable{
+public class GamePanel extends CustomPanel implements Runnable{
 
     // screen settings
 
@@ -100,6 +100,11 @@ public class GamePanel extends JPanel implements Runnable{
                 timer = 0;
             }
 
+            if (countdownTimer.second <= 0) {
+                saveScore();
+                currentState = GoToEvent.END_PANEL;
+            }
+
             try {
                 double remainingTime = nextDrawTime - System.nanoTime();
                 remainingTime = remainingTime/1000000;
@@ -116,6 +121,15 @@ public class GamePanel extends JPanel implements Runnable{
             }
         }
     }
+
+    private void saveScore() {
+        try {
+            ScoreUtils.saveScore(score);
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void update() {
         player.update();
         pointer.update();
